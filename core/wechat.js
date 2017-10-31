@@ -16,11 +16,32 @@ function WeChat(options){
     this.appID=options.appID;
     this.appsecret=options.appsecret;
     
-    this.getNowAccessToken(options).then((data)=>{
-      
-    });
+    this.getAccessToken=options.getAccessToken;
+    this.saveAccessToken=options.saveAccessToken;
+    
+    this.getAccessToken()
+        .then((data)=>{
+          try{
+            //转成对象
+            data=JSON.parse(data);
+          }
+          catch(e){
+              //更新access_token
+              return me.updateAccessToken();
+          }
+          //判断access_token是否合法
+          if(!me.isAccessTokenValidate(data)){
+              return me.updateAccessToken();
+          }
+          else{
+              return Promise.resolve(data);
+          }
+        })
+        .then((data)=>{
+            this.saveAccessToken(data);
+        });
+};
   
-}
 
 WeChat.prototype={
   isAccessTokenValidate:function(data){
@@ -48,40 +69,21 @@ WeChat.prototype={
               access_token:accessToken.access_token,
               expires_in:(new Date()).getTime() + (accessToken.expires_in - 20) * 1000
             };
-           resolve(data);                  
+           resolve(data);      
+           console.log(data);
           }
         })
     })
-  },
-  getNowAccessToken:function(options){
-      var me=this;
-      return new Promise((resolve,reject)=>{
-        options.getAccessToken()
-        .then((data)=>{
-          try{
-            //转成对象
-            data=JSON.parse(data);
-          }
-          catch(e){
-              //更新access_token
-              return me.updateAccessToken();
-          }
-          //判断access_token是否合法
-          if(!me.isAccessTokenValidate(data)){
-              return me.updateAccessToken();
-          }
-          else{
-              return Promise.resolve(data);
-          }
-        })
-        .then((data)=>{
-            options.saveAccessToken(data);
-            resolve(data);
-        });
-      });
-    }
+ 	},
+ 	getNowAccessToken:function(options){
+ 		return new Promise((resolve,reject)=>{
+ 			options.getAccessToken().then(function(data){
+ 				resolve(JSON.parse(data));
+ 			})
+ 		})
+ 	}
+}
   
-};
 
 
 

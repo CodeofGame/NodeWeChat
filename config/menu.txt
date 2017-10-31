@@ -1,0 +1,17 @@
+﻿{
+    "is_menu_open": 1,
+    "selfmenu_info": {
+        "button": [
+            {
+                "type": "view",
+                "name": "缴费",
+                "url": "http://mp.weixin.qq.com/bizmall/mallshelf?id=&t=mall/list&biz=MzI3NzcyOTU0MQ==&shelf_id=1&showwxpaytitle=1#wechat_redirect"
+            },
+            {
+                "type": "view",
+                "name": "赛事",
+                "url": "http://www.soso.com/"
+            }
+        ]
+    }
+}

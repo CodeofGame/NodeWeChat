@@ -5,9 +5,10 @@ var accessTokenFile=path.join(__dirname,"../config/accessToken.txt");
 
 var config={
   wechat:{
-    appID:"wx2ea795e409b2c674",
-    appsecret:"e4632492abb3de0943fc7ca20c4b27d0",
-    token:"wechat",
+    appID:"wx4340533ee0d65771",
+    appsecret:"f19b5dee7113f591beb3efc6a04383eb",
+    token:"saishi",
+    EncodingAESKey:"WzfIW8sUIaelFrn7uvMtmkHEp77y2L8YgrHW74RujLF",
     //从文件中读取access_token
     getAccessToken:function(){
         return new Promise((resolve,reject)=>{

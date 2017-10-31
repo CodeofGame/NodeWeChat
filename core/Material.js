@@ -3,9 +3,11 @@ var request=require("request");
 var Promise=require("bluebird");
 var WeChat=require("./wechat");
 var config=require("./config");
+var fs=require("fs");
 let prefix="https://api.weixin.qq.com/cgi-bin/material"
 let api={
   materialList:prefix+"/batchget_material?"
+  
 };
 
 
@@ -15,7 +17,7 @@ function getMaterialList(){
       wechat.getNowAccessToken(config.wechat).then((data)=>{
       var url=api.materialList+`access_token=${data.access_token}`;
       var formData={
-        "type":"image",
+        "type":"news",
         "offset":0,
         "count":20
       };

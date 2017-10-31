@@ -5,7 +5,7 @@ var message=require("./message");
 var querystring=require("querystring");
 var request=require("request");
 var material=require("./Material");
-
+var menu=require("./menu");
 
 module.exports = function(options) {
 
@@ -58,7 +58,8 @@ function test(ctx) {
         let reponse = "";
         if(msg.MsgType === "text") {
           var content= msg.Content;
-          var v=treatUserText(content);
+          //var v=treatUserText(content);
+          var v=`1.全国第10届英才杯决赛\n <a href='http://www.jz-contest.com/?page_id=1108'>>>>>报名通道</a>`;
           reponse=message.formTextMessage(msg,v)
           //聊天机器人先注掉
       //        chatRobot(content).then(function(v) {
@@ -69,7 +70,7 @@ function test(ctx) {
         else if(msg.MsgType === "event"){
              //关注事件
              if(msg.Event === "subscribe"){
-               var content="欢迎关注我的公众号！<a href='http://www.baidu.com'>关于我们</a>\n谢谢了";
+               var content=`感谢关注青少年素质竞赛网!\n 1.全国第10届英才杯决赛\n <a href='http://www.jz-contest.com/?page_id=1108'>>>>>报名通道</a>`;
                reponse=message.formTextMessage(msg,content);
                resolve(reponse);
              }
@@ -114,6 +115,9 @@ function treatUserText(content){
       console.log(data);
     });
   
+  }
+  else if(content=="生成菜单"){
+  		menu.createMenu();
   }
   else
     result="默认值";
