@@ -16,4 +16,14 @@ app.use(core(config.wechat));
 app.listen(3000);
 
 console.log("server is running at 3000!");
+d
+d
+d
+d
+d
+d
+d
+d
+d
+
 
